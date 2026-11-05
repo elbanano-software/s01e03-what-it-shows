@@ -4,14 +4,14 @@ title: '#4471 · date reports split by cause'
 owner: support desk · elbanano-software
 status: current
 reviewed: 2026-11-05
-signature: elbanano-software
+signature: 'v1.eyJzdWIiOiIxMzU2NCIsImF1ZCI6ImNoYWxsZW5nZTp3aGF0LWl0LXNob3dzIiwiaWF0IjoxNzkzOTE3MzQ0LCJleHAiOjE3OTQwMDM3NDR9.GToEgWkhzwfxMnkfp_rG8MKlCJG2B3MSiekIX1YncnI'
 ---
 
 <script lang="ts">
   import CauseBreakdown from '#lib/kb/CauseBreakdown.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 
-  const signature = 'elbanano-software';
+  const signature = 'v1.eyJzdWIiOiIxMzU2NCIsImF1ZCI6ImNoYWxsZW5nZTp3aGF0LWl0LXNob3dzIiwiaWF0IjoxNzkzOTE3MzQ0LCJleHAiOjE3OTQwMDM3NDR9.GToEgWkhzwfxMnkfp_rG8MKlCJG2B3MSiekIX1YncnI';
   const issues = {
     parser: 'https://github.com/elbanano-software/s01e03-what-it-shows/issues/1',
     hint: 'https://github.com/elbanano-software/s01e03-what-it-shows/issues/2',
