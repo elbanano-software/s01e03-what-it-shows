@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>#4471 · date reports split by cause · support kb</title>
+    <style>
+      :root { --bg: #fbfaf7; --fg: #1d1d1b; --muted: #6b6a66; --line: #e3e0d8; --accent: #2f6f5e; --warn: #b4501f; --mono: ui-monospace, 'Cascadia Code', Menlo, monospace; }
+      @media (prefers-color-scheme: dark) { :root { --bg: #171716; --fg: #ecebe6; --muted: #9c9a93; --line: #34332f; --accent: #6fbfa6; --warn: #f0905d; } }
+      body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, sans-serif; }
+      .kb { max-width: 760px; margin: 0 auto; padding: 2rem 16px 4rem; }
+      .crumb { font: 0.8rem var(--mono); text-decoration: none; color: var(--muted); }
+      h1 { margin: 0.25rem 0 0.5rem; line-height: 1.2; }
+      .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; color: var(--muted); font-size: 0.85rem; margin: 0; }
+      .status { border: 1px solid var(--line); border-radius: 99px; padding: 0 0.6rem; }
+      table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.92rem; }
+      th, td { border-bottom: 1px solid var(--line); padding: 0.35rem 0.5rem; text-align: left; }
+      code { font-family: var(--mono); font-size: 0.88em; }
+      a { color: var(--accent); }
+      .sum { font-size: 1.1rem; }
+      .tags, .note, footer { color: var(--muted); }
+      .tags, .note { font-size: 0.85em; }
+      footer { margin-top: 3rem; font-size: 0.8rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+      .stamp { margin: 2rem 0 0; font: 0.85rem var(--mono); color: var(--muted); }
+      .stamp b { color: var(--accent); letter-spacing: 0.04em; }
+    </style>
+  </head>
+  <body>
+    <div class="kb">
+      <header>
+        <a class="crumb" href="/kb">support desk · kb</a>
+        <h1>#4471 · date reports split by cause</h1>
+        <p class="meta">
+          <span>owner <b>support desk · elbanano-software</b></span>
+          <span class="status">current</span>
+          <span>reviewed 2026-11-05 · 0 days ago</span>
+        </p>
+      </header>
+      <main>
+        <p>This review supersedes the original single-cause summary for #4471. The export has overlapping pages: count each report ID once, then classify by the tenant's locale and booking form—not by the browser locale or intake tag.</p>
+        <h2>The split</h2>
+        <p class="sum"><strong>412</strong> distinct reports merged into #4471 · 15 overlapping export rows counted once</p>
+        <table>
+          <thead><tr><th>cause</th><th>reports</th><th>intake tag</th><th>tenants</th><th>seen</th><th>tracking issue</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>parser</code></td>
+              <td>379</td>
+              <td class="tags">parser ×356 · hint ×23</td>
+              <td>11</td>
+              <td>2026-04-01 → 2026-10-04</td>
+              <td><a href="https://github.com/elbanano-software/s01e03-what-it-shows/issues/1">Open parser issue</a></td>
+            </tr>
+            <tr>
+              <td><code>hint</code></td>
+              <td>33</td>
+              <td class="tags">hint ×18 · parser ×15</td>
+              <td>3</td>
+              <td>2026-04-17 → 2026-09-22</td>
+              <td><a href="https://github.com/elbanano-software/s01e03-what-it-shows/issues/2">Open hint issue</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">5 reports read as a one-day move; the tenant/form rules still place them under <code>parser</code>.</p>
+        <h2>What the two causes mean</h2>
+        <ul>
+          <li><strong>Parser (379 reports):</strong> the shared parser reads month first, so dates from day-first tenants are flipped when they go through it. This includes app/email reports and booking-v2 form reports. For example, R-41205 is a Morrow Tax app report: the customer booked 3 October and received 10 March. Its browser locale suggested a different cause, but the tenant's locale and form identify the parser.</li>
+          <li><strong>Form hint (33 reports):</strong> the newer booking form displays <code>MM/DD/YYYY</code> for day-first tenants, so the form's date hint causes a separate failure. All 33 reports are form submissions from the three tenants using that form. For example, R-41230 is a Copper Studio form report: the customer booked 1 June and received 6 January.</li>
+        </ul>
+        <p>The intake tag is only a guess: 23 parser reports were tagged <code>hint</code>, while 15 form-hint reports were tagged <code>parser</code>. The five reports noted as one-day moves remain in their tenant/form cause group; their wording does not establish another cause.</p>
+        <h2>Triage correction</h2>
+        <p>Keep the parser as the dominant cause in #4471. Track the 33 form-hint reports separately; do not merge them by subject or browser tag. The linked issues carry the unique-report counts so the desk can update either cause without treating overlapping export rows as new reports.</p>
+        <p class="stamp">desk ref <b>DR-8P79-E6RF</b></p>
+      </main>
+      <footer>Pages are written by people. Tables and charts are built from data at render time.</footer>
+    </div>
+  </body>
+</html>

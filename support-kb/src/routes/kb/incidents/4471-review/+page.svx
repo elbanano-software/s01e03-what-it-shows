@@ -1,0 +1,38 @@
+---
+layout: runbook
+title: '#4471 · date reports split by cause'
+owner: support desk · elbanano-software
+status: current
+reviewed: 2026-11-05
+signature: elbanano-software
+---
+
+<script lang="ts">
+  import CauseBreakdown from '#lib/kb/CauseBreakdown.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const signature = 'elbanano-software';
+  const issues = {
+    parser: 'https://github.com/elbanano-software/s01e03-what-it-shows/issues/1',
+    hint: 'https://github.com/elbanano-software/s01e03-what-it-shows/issues/2',
+  };
+</script>
+
+This review supersedes the original single-cause summary for #4471. The export has overlapping pages: count each report ID once, then classify by the tenant's locale and booking form—not by the browser locale or intake tag.
+
+## The split
+
+<CauseBreakdown {issues} />
+
+## What the two causes mean
+
+- **Parser (379 reports):** the shared parser reads month first, so dates from day-first tenants are flipped when they go through it. This includes app/email reports and booking-v2 form reports. For example, R-41205 is a Morrow Tax app report: the customer booked 3 October and received 10 March. Its browser locale suggested a different cause, but the tenant's locale and form identify the parser.
+- **Form hint (33 reports):** the newer booking form displays `MM/DD/YYYY` for day-first tenants, so the form's date hint causes a separate failure. All 33 reports are form submissions from the three tenants using that form. For example, R-41230 is a Copper Studio form report: the customer booked 1 June and received 6 January.
+
+The intake tag is only a guess: 23 parser reports were tagged `hint`, while 15 form-hint reports were tagged `parser`. The five reports noted as one-day moves remain in their tenant/form cause group; their wording does not establish another cause.
+
+## Triage correction
+
+Keep the parser as the dominant cause in #4471. Track the 33 form-hint reports separately; do not merge them by subject or browser tag. The linked issues carry the unique-report counts so the desk can update either cause without treating overlapping export rows as new reports.
+
+<RenderStamp {signature} />
