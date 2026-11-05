@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 · date reports split by cause'
 owner: support desk · elbanano-software
-status: current
+status: closed
 reviewed: 2026-11-05
 signature: 'v1.eyJzdWIiOiIxMzU2NCIsImF1ZCI6ImNoYWxsZW5nZTp3aGF0LWl0LXNob3dzIiwiaWF0IjoxNzkzOTE3MzQ0LCJleHAiOjE3OTQwMDM3NDR9.GToEgWkhzwfxMnkfp_rG8MKlCJG2B3MSiekIX1YncnI'
 ---
@@ -16,13 +16,17 @@ signature: 'v1.eyJzdWIiOiIxMzU2NCIsImF1ZCI6ImNoYWxsZW5nZTp3aGF0LWl0LXNob3dzIiwia
     parser: 'https://github.com/elbanano-software/s01e03-what-it-shows/issues/1',
     hint: 'https://github.com/elbanano-software/s01e03-what-it-shows/issues/2',
   };
+  const resolutions = {
+    parser: 'fixed',
+    hint: "won't fix",
+  };
 </script>
 
 This review supersedes the original single-cause summary for #4471. The export has overlapping pages: count each report ID once, then classify by the tenant's locale and booking form—not by the browser locale or intake tag.
 
 ## The split
 
-<CauseBreakdown {issues} />
+<CauseBreakdown {issues} {resolutions} />
 
 ## What the two causes mean
 
@@ -34,5 +38,12 @@ The intake tag is only a guess: 23 parser reports were tagged `hint`, while 15 f
 ## Triage correction
 
 Keep the parser as the dominant cause in #4471. Track the 33 form-hint reports separately; do not merge them by subject or browser tag. The linked issues carry the unique-report counts so the desk can update either cause without treating overlapping export rows as new reports.
+
+## Resolution · 5 October 2026
+
+- **Parser:** fixed by `fix(dates): parse dd/mm for eu locales`. Its tracking issue is closed as completed.
+- **Form hint:** won't fix because booking-v3 was retired. Its tracking issue is closed as not planned.
+
+The support desk closed #4471 after recording both outcomes.
 
 <RenderStamp {signature} />

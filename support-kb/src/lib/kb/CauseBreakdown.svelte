@@ -4,7 +4,7 @@
   import { groupByCause, readAs, uniqueById, type Cause, type Report } from '#lib/kb/causes';
   import { tenantOf } from '#lib/kb/locales';
 
-  let { issues }: { issues: Record<Cause, string> } = $props();
+  let { issues, resolutions }: { issues: Record<Cause, string>; resolutions: Record<Cause, string> } = $props();
 
   const merged = $derived(uniqueById(reports as Report[]).filter((r) => r.mergedInto === 4471));
   const groups = $derived(groupByCause(merged, tenantOf));
@@ -22,7 +22,7 @@
 
 <table>
   <thead>
-    <tr><th>cause</th><th>reports</th><th>intake tag</th><th>tenants</th><th>seen</th><th>tracking issue</th></tr>
+    <tr><th>cause</th><th>reports</th><th>intake tag</th><th>tenants</th><th>seen</th><th>resolution</th><th>tracking issue</th></tr>
   </thead>
   <tbody>
     {#each groups as g (g.cause)}
@@ -32,6 +32,7 @@
         <td class="tags">{tags(g)}</td>
         <td>{g.tenants}</td>
         <td>{g.firstSeen} → {g.lastSeen}</td>
+        <td>{resolutions[g.cause as Cause]}</td>
         <td><a href={issues[g.cause as Cause]}>Open {g.cause} issue</a></td>
       </tr>
     {/each}

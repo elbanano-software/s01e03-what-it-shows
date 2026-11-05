@@ -32,7 +32,7 @@
         <h1>#4471 · date reports split by cause</h1>
         <p class="meta">
           <span>owner <b>support desk · elbanano-software</b></span>
-          <span class="status">current</span>
+          <span class="status">closed</span>
           <span>reviewed 2026-11-05 · 0 days ago</span>
         </p>
       </header>
@@ -41,7 +41,7 @@
         <h2>The split</h2>
         <p class="sum"><strong>412</strong> distinct reports merged into #4471 · 15 overlapping export rows counted once</p>
         <table>
-          <thead><tr><th>cause</th><th>reports</th><th>intake tag</th><th>tenants</th><th>seen</th><th>tracking issue</th></tr></thead>
+          <thead><tr><th>cause</th><th>reports</th><th>intake tag</th><th>tenants</th><th>seen</th><th>resolution</th><th>tracking issue</th></tr></thead>
           <tbody>
             <tr>
               <td><code>parser</code></td>
@@ -49,6 +49,7 @@
               <td class="tags">parser ×356 · hint ×23</td>
               <td>11</td>
               <td>2026-04-01 → 2026-10-04</td>
+              <td>fixed</td>
               <td><a href="https://github.com/elbanano-software/s01e03-what-it-shows/issues/1">Open parser issue</a></td>
             </tr>
             <tr>
@@ -57,6 +58,7 @@
               <td class="tags">hint ×18 · parser ×15</td>
               <td>3</td>
               <td>2026-04-17 → 2026-09-22</td>
+              <td>won't fix</td>
               <td><a href="https://github.com/elbanano-software/s01e03-what-it-shows/issues/2">Open hint issue</a></td>
             </tr>
           </tbody>
@@ -70,6 +72,12 @@
         <p>The intake tag is only a guess: 23 parser reports were tagged <code>hint</code>, while 15 form-hint reports were tagged <code>parser</code>. The five reports noted as one-day moves remain in their tenant/form cause group; their wording does not establish another cause.</p>
         <h2>Triage correction</h2>
         <p>Keep the parser as the dominant cause in #4471. Track the 33 form-hint reports separately; do not merge them by subject or browser tag. The linked issues carry the unique-report counts so the desk can update either cause without treating overlapping export rows as new reports.</p>
+        <h2>Resolution · 5 October 2026</h2>
+        <ul>
+          <li><strong>Parser:</strong> fixed by <code>fix(dates): parse dd/mm for eu locales</code>. Its tracking issue is closed as completed.</li>
+          <li><strong>Form hint:</strong> won't fix because booking-v3 was retired. Its tracking issue is closed as not planned.</li>
+        </ul>
+        <p>The support desk closed #4471 after recording both outcomes.</p>
         <p class="stamp">desk ref <b>DR-VSWP-DS7G</b></p>
       </main>
       <footer>Pages are written by people. Tables and charts are built from data at render time.</footer>
